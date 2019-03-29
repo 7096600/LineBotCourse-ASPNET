@@ -42,12 +42,30 @@ namespace WebApplication2.Controllers
                             case "/下一頁":
                                 SwitchMenuTo("快捷選單2", LineEvent);
                                 break;
+                            case "秘書告退":
+                                if (LineEvent.source.type.ToLower() == "room") {
+                                    Utility.LeaveRoom(LineEvent.source.roomId, channelAccessToken);
+                                } else if (LineEvent.source.type.ToLower() == "group") {
+                                    Utility.LeaveRoom(LineEvent.source.groupId, channelAccessToken);
+                                } else {
+                                    this.ReplyMessage(LineEvent.replyToken, "你開玩笑嗎？");
+                                }
+                                break;
                             default:
-                                this.ReplyMessage(LineEvent.replyToken, "你說了:" + LineEvent.message.text);
+                                Models.blah rec = new Models.blah();
+                                rec.userId = LineEvent.source.userId;
+                                rec.displayName = userinfo.displayName;
+                                rec.message = LineEvent.message.text;
+                                rec.createdDate = DateTime.Now;
+
+                                Models.MainDBDataContext db = new Models.MainDBDataContext();
+                                db.blah.InsertOnSubmit(rec);
+                                db.SubmitChanges();
+
+                                this.ReplyMessage(LineEvent.replyToken, "Hi," + userinfo.displayName + "("+ LineEvent.source.userId + "), 你說了:" 
+                                    + LineEvent.message.text + "(" + DateTime.Now.ToString() + ")" );
                                 break;
                         }
-                        this.ReplyMessage(LineEvent.replyToken, userinfo.displayName + "你說了:" + LineEvent.message.text
-                          + " 你的用戶ID是" + LineEvent.source.userId);
                     }
                     if (LineEvent.message.type == "sticker") //收到貼圖
                     { this.ReplyMessage(LineEvent.replyToken, 1, 2); }

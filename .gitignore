@@ -3,7 +3,7 @@
 [Bb]in
 [Tt]emp
 [Pp]ackages
-App_Data
+appSettings.config
 .vs
 *.user
 *.suo
