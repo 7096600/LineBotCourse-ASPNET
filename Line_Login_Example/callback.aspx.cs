@@ -10,6 +10,9 @@ namespace Line_Login_Example
 {
     public partial class callback : System.Web.UI.Page
     {
+        string client_id = WebConfigurationManager.AppSettings["client_id"];
+        string client_secret = WebConfigurationManager.AppSettings["client_secret"];
+
         protected void Page_Load(object sender, EventArgs e)
         {
             //取得返回的code
@@ -23,8 +26,8 @@ namespace Line_Login_Example
             Response.Write("<br/> code : " + code);
             //從Code取回toke
             var token = Utility.GetTokenFromCode(code,
-                "1559977315",  //TODO:請更正為你自己的 client_id
-                "6d9abe337566e4056ba89afbea1a9b61", //TODO:請更正為你自己的 client_secret
+                client_id,  //TODO:請更正為你自己的 client_id
+                client_secret, //TODO:請更正為你自己的 client_secret
                 "http://localhost:17615/callback.aspx");
             //顯示，測試用
             Response.Write("<br/> token : " + token.access_token);
