@@ -30,7 +30,7 @@ namespace StudyHostExampleLinebot.Controllers
                 //回覆訊息
                 if (LineEvent.type == "message")
                 {
-                    var repmsg = "";
+                    //var repmsg = "";
                     if (LineEvent.message.type == "text") //收到文字
                     {
                         //建立 MsQnAMaker Client
