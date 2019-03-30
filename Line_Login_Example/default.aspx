@@ -20,7 +20,7 @@
         function Auth() {
             var URL = 'https://access.line.me/oauth2/v2.1/authorize?';
             URL += 'response_type=code';
-            URL += '&client_id=1559977315';   //TODO:這邊要換成你的client_id
+            URL += '&client_id=' + <%=ConfigurationManager.AppSettings["client_id"] %>;   //TODO:這邊要換成你的client_id
             URL += '&redirect_uri=http://localhost:17615/callback.aspx';   //TODO:要將此redirect url 填回你的 LineLogin後台設定
              URL += '&scope=openid%20profile';
             URL += '&state=abcde';

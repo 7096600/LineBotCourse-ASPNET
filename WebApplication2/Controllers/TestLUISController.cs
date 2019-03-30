@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web.Configuration;
 using System.Web.Http;
 
 namespace WebApplication2.Controllers
 {
     public class TestLUISController : isRock.LineBot.LineWebHookControllerBase
     {
-        const string channelAccessToken = "~~~請改成自己的ChannelAccessToken~~~";
-        const string AdminUserId = "~~~改成你的AdminUserId~~~";
-        const string LuisAppId = "~~~改成你的LuisAppId~~~";
-        const string LuisAppKey = "~~~改成你的LuisAppKey~~~";
-        const string Luisdomain = "~~~改成你的Luisdomain~~~"; //ex.westus
+        string channelAccessToken = WebConfigurationManager.AppSettings["channelAccessToken2"];
+        string AdminUserId = WebConfigurationManager.AppSettings["AdminUserId2"];
+        string LuisAppId = WebConfigurationManager.AppSettings["LuisAppId"];
+        string LuisAppKey = WebConfigurationManager.AppSettings["LuisAppKey"];
+        string Luisdomain = WebConfigurationManager.AppSettings["Luisdomain"]; //ex.westus
 
         [Route("api/TestLUIS")]
         [HttpPost]
